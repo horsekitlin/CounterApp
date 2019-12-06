@@ -41,7 +41,7 @@ class App extends React.Component {
           </Text>
         </TouchableOpacity>
 
-        <CounterView style={ styles.wrapper }/>
+        <CounterView style={ styles.wrapper } count={2} />
       </View>
     );
   }
