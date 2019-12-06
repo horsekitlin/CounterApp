@@ -28,6 +28,11 @@ class App extends React.Component {
   increment = () => {
     this.setState({ count: this.state.count + 1 })
   }
+  update = e => {
+    this.setState({
+      count: e.nativeEvent.count
+    })
+  }
 
   render() {
     return (
@@ -41,7 +46,7 @@ class App extends React.Component {
           </Text>
         </TouchableOpacity>
 
-        <CounterView style={ styles.wrapper } count={2} />
+        <CounterView style={ styles.wrapper } count={2} onUpdate={this.update} />
       </View>
     );
   }
