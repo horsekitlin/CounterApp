@@ -11,6 +11,7 @@ import {
   StyleSheet,
   View,
   Text,
+  UIManager,
   TouchableOpacity,
   requireNativeComponent,
 } from 'react-native';
@@ -34,6 +35,14 @@ class App extends React.Component {
     })
   }
 
+  updateNative = () => {
+    UIManager.dispatchViewManagerCommand(
+      findNodeHandle(this.counterRef),                     // 1
+      UIManager["CounterView"].Commands.updateFromManager, // 2
+      [this.state.count]                                   // 3
+    );
+  }
+
   render() {
     return (
       <View style={styles.container}>
@@ -46,7 +55,12 @@ class App extends React.Component {
           </Text>
         </TouchableOpacity>
 
-        <CounterView style={ styles.wrapper } count={2} onUpdate={this.update} />
+        <CounterView
+          style={ styles.wrapper }
+          count={this.state.count}
+          onUpdate={this._onUpdate}
+          ref={ref => this.ref = ref}
+        />
       </View>
     );
   }

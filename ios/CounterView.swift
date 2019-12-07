@@ -5,7 +5,9 @@
 //  Created by 林暐秦 on 2019/12/6.
 //  Copyright © 2019 Facebook. All rights reserved.
 //
+
 import UIKit
+
 class CounterView: UIView {
   
    @objc var onUpdate: RCTDirectEventBlock?
@@ -20,6 +22,11 @@ class CounterView: UIView {
     self.addSubview(button)
     increment()
   }
+  
+  static func requiresMainQueueSetup() -> Bool {
+    return true
+  }
+  
   required init?(coder aDecoder: NSCoder) {
     fatalError("init(coder:) has not been implemented")
   }
@@ -42,6 +49,10 @@ class CounterView: UIView {
     
     return b
   }()
+  
+  @objc func update(value: NSNumber) {
+      count = value
+  }
   
   @objc func sendUpdate(_ gesture: UILongPressGestureRecognizer) {
     if gesture.state == .began {
