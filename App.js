@@ -35,6 +35,12 @@ class App extends React.Component {
     })
   }
 
+  _onUpdate = event => {
+    if (this.props.onUpdate) {
+      this.props.onUpdate(event.nativeEvent);
+    }
+  };
+  
   updateNative = () => {
     UIManager.dispatchViewManagerCommand(
       findNodeHandle(this.counterRef),                     // 1
